@@ -8,7 +8,8 @@
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-<form action="/store/new" method="post">
+<form action="/store/new" method="post" enctype="multipart/form-data">
+    <input type="file"><br>
     가게이름 : <input type="text" name="storename">  <br>
     가게위치 : <input type="text" name="storelocation">  <br>
     메뉴 : <input type="text" name="storemenu">  <br>
