@@ -1,6 +1,6 @@
 package com.notice.board.service;
 
-import com.notice.board.entitiy.Store;
+import com.notice.board.entity.Store;
 import com.notice.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
