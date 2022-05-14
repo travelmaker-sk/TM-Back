@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
-import java.util.List;
 
 
 @Controller      //spring bean 사용하여 따로 설정했으므로 삭제해야함
@@ -27,7 +24,7 @@ public class BoardController {
     @GetMapping("store/new")
     public String createStore(){
 
-        return "store/StorecreateForm";
+        return "store/Storecreate";
     }
 
     // URL 이 변경되지 않은 상태에서 실행
@@ -55,6 +52,28 @@ public class BoardController {
     @GetMapping("store/delete")         // 게시물 삭제
     public String Storedelete(int id){
         service.storedelete(id);
-        return "store/findall";
+        return "redirect:/store/findall";
+    }
+
+    @GetMapping("store/modify/{id}")            // 게시물 수정
+    public String Storemodify(@PathVariable("id") int id,Model model){
+        model.addAttribute("data", service.storedetail(id));
+        return "store/Storemodify";
+    }
+
+    @PostMapping("store/update/{id}")           // 게시물 수정 페이지
+        public String Storeupdate(@PathVariable("id") int id,Store store){
+
+        Store storetemp = service.storedetail(id);          // 기존의 내용
+        storetemp.setStorename(store.getStorename());       // 기존의 내용중 이름을 새로운 값으로 덮어씌움
+        storetemp.setStorelocation(store.getStorelocation());
+        storetemp.setStoremenu(store.getStoremenu());
+        storetemp.setStoreprice(store.getStoreprice());
+        storetemp.setStoretag(store.getStoretag());
+
+        service.storewrite(storetemp);
+
+        return "redirect:/store/findall";
+
     }
 }
