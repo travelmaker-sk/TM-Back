@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>찾은 맛집 정보</title>
+</head>
+<body>
+<p th:text="'ID : '+${data.storeid}"></p>   <!-- ""안에 ''사용하여 메세지 출력과 thymeleaf사용하여 값 출력 , member는 controller에서 설정한 객체 이름 -->
+<p th:text="'가게이름 : '+${data.storename}"></p>
+<p th:text="'가게위치 : '+${data.storelocation}"></p>
+<p th:text="'메뉴 : '+${data.storemenu}"></p>
+<p th:text="'가격 : '+${data.storeprice}"></p>
+<p th:text="'태그 : '+${data.storetag}"></p><hr>
+
+<a href="@{/store/delete(id=${store.storeid})}">삭제</a>
+
+</body>
+</html>

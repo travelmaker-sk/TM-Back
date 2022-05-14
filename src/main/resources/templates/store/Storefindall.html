@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>맛집 전체 출력</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>LOCATION</th>
+        <th>MENU</th>
+        <th>PRICE</th>
+        <th>TAG</th>
+    </tr>
+    </thead>
+    <tbody>
+         <!-- information 변수안에 data를 for:each문을 통해 모든 값을 반복하여 넣는다. -->
+         <tr th:each ="information : ${list}">
+        <td th:text="${information.storeid}"></td>      <!-- information변수안에 id값을 넣는다. -->
+        <td>
+            <a  th:text="${information.storename}" th:href="@{/store/finddetail(id=${information.storeid})}"></a>
+        </td>
+        <td th:text="${information.storelocation}"></td>
+        <td th:text="${information.storemenu}"></td>
+        <td th:text="${information.storeprice}"></td>
+        <td th:text="${information.storetag}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
