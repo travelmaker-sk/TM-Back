@@ -1,4 +1,4 @@
-package com.notice.board.entitiy;
+package com.notice.board.entity;
 
 
 import lombok.Data;
@@ -21,6 +21,6 @@ public class Store{
     private String storemenu;
     private int storeprice;
     private String storetag;
-
-
+    private String filename;
+    private String filepath;
 }
