@@ -5,6 +5,8 @@
     <title>맛집 상세 페이지</title>
 </head>
 <body>
+<img th:src="@{${data.storefilepath}}"/>
+<!-- <a th:href="@{${data.storefilepath}}">다운받기</a>     변수는 ${변수}로 감싸줘야 한다.  -->
 <p th:text="'ID : '+${data.storeid}"></p>   <!-- ""안에 ''사용하여 메세지 출력과 thymeleaf사용하여 값 출력 , member는 controller에서 설정한 객체 이름 -->
 <p th:text="'가게이름 : '+${data.storename}"></p>
 <p th:text="'가게위치 : '+${data.storelocation}"></p>
