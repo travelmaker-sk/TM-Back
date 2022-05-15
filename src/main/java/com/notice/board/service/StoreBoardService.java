@@ -1,7 +1,7 @@
 package com.notice.board.service;
 
 import com.notice.board.entity.Store;
-import com.notice.board.repository.BoardRepository;
+import com.notice.board.repository.StoreBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Service     //spring bean 사용하여 따로 설정했으므로 삭제해야함
-public class BoardService {
+public class StoreBoardService {
 
     @Autowired
-    private BoardRepository repository;
+    private StoreBoardRepository repository;
 
-    public BoardService(BoardRepository repository){
+    public StoreBoardService(StoreBoardRepository repository){
         this.repository = repository;
     }
 
     public void storewrite(Store store, MultipartFile file) throws IOException {
 
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";        // 파일 경로 저장
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\store";        // 파일 경로 저장
 
         UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
 
@@ -34,8 +34,12 @@ public class BoardService {
         file.transferTo(saveFile);
 
         store.setStorefilename(filename);                   // 파일 이름  db 저장
-        store.setStorefilepath("/files/"+filename);         // 파일 경로 db 저장
+        store.setStorefilepath("/files/store/"+filename);         // 파일 경로 db 저장
 
+        repository.save(store);
+    }
+
+    public void storeeditwrite(Store store){
         repository.save(store);
     }
 
