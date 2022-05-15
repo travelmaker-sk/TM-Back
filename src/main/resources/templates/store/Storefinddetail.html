@@ -12,6 +12,7 @@
 <p th:text="'가게위치 : '+${data.storelocation}"></p>
 <p th:text="'메뉴 : '+${data.storemenu}"></p>
 <p th:text="'가격 : '+${data.storeprice}"></p>
+<p th:text="'평점 : '+${data.storescore}"></p>
 <p th:text="'태그 : '+${data.storetag}"></p><hr>
 <button><a th:href="@{/store/modify/{id}(id=${data.storeid})}">수정</a></button>
 <button><a th:href="@{/store/delete(id=${data.storeid})}">삭제</a></button>
