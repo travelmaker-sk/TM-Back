@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 
 @Controller      //spring bean 사용하여 따로 설정했으므로 삭제해야함
@@ -28,10 +31,10 @@ public class BoardController {
     }
 
     // URL 이 변경되지 않은 상태에서 실행
-    @PostMapping("store/new")           // 게시글 작성 
-    public String createStoreData(Store store){
+    @PostMapping("store/new")           // 게시글 작성
+    public String createStoreData(Store store, MultipartFile file) throws IOException {
 
-       service.storewrite(store);
+        service.storewrite(store,file);
         return "redirect:/";    // 제일 첫 페이지로 돌아감
     }
 
@@ -62,7 +65,7 @@ public class BoardController {
     }
 
     @PostMapping("store/update/{id}")           // 게시물 수정 페이지
-        public String Storeupdate(@PathVariable("id") int id,Store store){
+    public String Storeupdate(@PathVariable("id") int id,Store store,MultipartFile file) throws IOException {
 
         Store storetemp = service.storedetail(id);          // 기존의 내용
         storetemp.setStorename(store.getStorename());       // 기존의 내용중 이름을 새로운 값으로 덮어씌움
@@ -71,7 +74,7 @@ public class BoardController {
         storetemp.setStoreprice(store.getStoreprice());
         storetemp.setStoretag(store.getStoretag());
 
-        service.storewrite(storetemp);
+        service.storewrite(storetemp,file);
 
         return "redirect:/store/findall";
 
