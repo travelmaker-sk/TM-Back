@@ -8,12 +8,13 @@
 <table border="1">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>NAME</th>
-        <th>LOCATION</th>
-        <th>MENU</th>
-        <th>PRICE</th>
-        <th>TAG</th>
+        <th>아이디</th>
+        <th>가게이름</th>
+        <th>위치</th>
+        <th>메뉴</th>
+        <th>가격</th>
+        <th>평점</th>
+        <th>태그</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td th:text="${information.storelocation}"></td>
         <td th:text="${information.storemenu}"></td>
         <td th:text="${information.storeprice}"></td>
+        <td th:text="${information.storescore}"></td>
         <td th:text="${information.storetag}"></td>
     </tr>
     </tbody>
