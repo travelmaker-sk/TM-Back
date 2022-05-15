@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>명소 전체 출력</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>아이디</th>
+        <th>명소이름</th>
+        <th>명소위치</th>
+        <th>날짜</th>
+        <th>날씨</th>
+        <th>평점</th>
+        <th>메모</th>
+        <th>태그</th>
+    </tr>
+    </thead>
+    <tbody>
+         <!-- information 변수안에 data를 for:each문을 통해 모든 값을 반복하여 넣는다. -->
+         <tr th:each ="information : ${list}">
+        <td th:text="${information.placeid}"></td>      <!-- information변수안에 id값을 넣는다. -->
+        <td>
+            <a  th:text="${information.placename}" th:href="@{/place/finddetail(id=${information.placeid})}"></a>
+        </td>
+        <td th:text="${information.placelocation}"></td>
+        <td th:text="${information.placedate}"></td>
+        <td th:text="${information.placeweather}"></td>
+        <td th:text="${information.placescore}"></td>
+        <td th:text="${information.placememo}"></td>
+        <td th:text="${information.placetag}"></td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
