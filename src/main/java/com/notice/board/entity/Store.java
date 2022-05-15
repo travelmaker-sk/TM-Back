@@ -21,6 +21,6 @@ public class Store{
     private String storemenu;
     private int storeprice;
     private String storetag;
-    private String filename;
-    private String filepath;
+    private String storefilename;
+    private String storefilepath;
 }
