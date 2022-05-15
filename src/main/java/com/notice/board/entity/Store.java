@@ -23,4 +23,5 @@ public class Store{
     private String storetag;
     private String storefilename;
     private String storefilepath;
+    private String storescore;
 }
