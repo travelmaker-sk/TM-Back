@@ -1,6 +1,8 @@
 package com.notice.board.service;
 
 import com.notice.board.entity.Lodging;
+import com.notice.board.entity.Place;
+import com.notice.board.entity.Store;
 import com.notice.board.repository.LodgingBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,26 +23,32 @@ public class LodgingBoardService {
         this.repository = repository;
     }
 
-    public void lodgingwrite(Lodging lodging, MultipartFile file) throws IOException {
+    public Lodging lodgingwrite(Lodging lodging, MultipartFile file) throws IOException {
 
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\lodging";        // 파일 경로 저장
 
-        UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
+        if(file.isEmpty()) {
+            Lodging save = repository.save(lodging);
+            return save;
+        }else{
+            String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\lodging";        // 파일 경로 저장
 
-        String filename = uuid + "_" + file.getOriginalFilename();      // 파일 이름 변수에 랜덤이름 저장 => uuid(랜덤 이름)_업로드한파일명
+            UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
 
-        File saveFile = new File(projectPath,filename);   // projectpath 경로에 name이름으로 저장할것
+            String filename = uuid + "_" + file.getOriginalFilename();      // 파일 이름 변수에 랜덤이름 저장 => uuid(랜덤 이름)_업로드한파일명
 
-        file.transferTo(saveFile);
+            File saveFile = new File(projectPath, filename);   // projectpath 경로에 name이름으로 저장할것
 
-        lodging.setLodgingfilename(filename);                   // 파일 이름  db 저장
-        lodging.setLodgingfilepath("/files/lodging/"+filename);         // 파일 경로 db 저장
+            file.transferTo(saveFile);
 
-        repository.save(lodging);
+            lodging.setLodgingfilename(filename);                   // 파일 이름  db 저장
+            lodging.setLodgingfilepath("/files/lodging/" + filename);         // 파일 경로 db 저장
+            Lodging save = repository.save(lodging);
+            return save;}
     }
 
-    public void lodgingeditwrite(Lodging lodging){
-        repository.save(lodging);
+    public Lodging lodgingeditwrite(Lodging lodging){
+        Lodging edit = repository.save(lodging);
+        return edit;
     }
 
     public List<Lodging> lodginglist(){

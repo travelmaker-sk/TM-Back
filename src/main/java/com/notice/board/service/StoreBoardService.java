@@ -21,26 +21,32 @@ public class StoreBoardService {
         this.repository = repository;
     }
 
-    public void storewrite(Store store, MultipartFile file) throws IOException {
+    public Store storewrite(Store store, MultipartFile file) throws IOException {
 
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\store";        // 파일 경로 저장
 
-        UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
+        if(file.isEmpty()) {
+            Store save = repository.save(store);
+            return save;
+        }else{
+            String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\store";        // 파일 경로 저장
 
-        String filename = uuid + "_" + file.getOriginalFilename();      // 파일 이름 변수에 랜덤이름 저장 => uuid(랜덤 이름)_업로드한파일명
+            UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
 
-        File saveFile = new File(projectPath,filename);   // projectpath 경로에 name이름으로 저장할것
+            String filename = uuid + "_" + file.getOriginalFilename();      // 파일 이름 변수에 랜덤이름 저장 => uuid(랜덤 이름)_업로드한파일명
 
-        file.transferTo(saveFile);
+            File saveFile = new File(projectPath, filename);   // projectpath 경로에 name이름으로 저장할것
 
-        store.setStorefilename(filename);                   // 파일 이름  db 저장
-        store.setStorefilepath("/files/store/"+filename);         // 파일 경로 db 저장
+            file.transferTo(saveFile);
 
-        repository.save(store);
+            store.setStorefilename(filename);                   // 파일 이름  db 저장
+            store.setStorefilepath("/files/store/" + filename);         // 파일 경로 db 저장
+            Store save = repository.save(store);
+        return save;}
     }
 
-    public void storeeditwrite(Store store){
-        repository.save(store);
+    public Store storeeditwrite(Store store){
+       Store edit = repository.save(store);
+        return edit;
     }
 
     public List<Store> storelist(){

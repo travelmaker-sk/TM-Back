@@ -37,6 +37,7 @@ public class LodgingBoardController {
     public String createLodgingData(Lodging lodging, MultipartFile file) throws IOException {
 
         service.lodgingwrite(lodging,file);
+
         return "redirect:/";    // 제일 첫 페이지로 돌아감
     }
 

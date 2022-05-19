@@ -3,18 +3,17 @@ package com.notice.board.controller;
 import com.notice.board.entity.Store;
 import com.notice.board.service.StoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 
-@Controller      //spring bean 사용하여 따로 설정했으므로 삭제해야함
+@RestController      //spring bean 사용하여 따로 설정했으므로 삭제해야함
 @RequestMapping(value="/store")
 public class StoreBoardController {
 
@@ -25,6 +24,7 @@ public class StoreBoardController {
         this.service = service;
     }
 
+
     // ------------- 맛집 부분 --------------
     @GetMapping("/new")
     public String createStore(){
@@ -34,10 +34,10 @@ public class StoreBoardController {
 
     // URL 이 변경되지 않은 상태에서 실행
     @PostMapping("/new")           // 게시글 작성
-    public String createStoreData(Store store, MultipartFile file) throws IOException {
+    public String createStoreData(Store store,MultipartFile file) throws IOException {
 
         service.storewrite(store,file);
-        return "redirect:/";    // 제일 첫 페이지로 돌아감
+        return "redirect:/ ";    // 제일 첫 페이지로 돌아감
     }
 
     @GetMapping("/findall")                // 게시글 전체 출력
@@ -60,13 +60,13 @@ public class StoreBoardController {
         return "redirect:/store/findall";
     }
 
-    @GetMapping("/modify/{id}")            // 게시물 수정
+    @GetMapping("/modify/{id}")            // 게시물 수정을 위한 수정 form
     public String Storemodify(@PathVariable("id") int id,Model model){
         model.addAttribute("data", service.storedetail(id));
         return "store/Storemodify";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update/{id}")        // 게시물 수정
     public String Storeupdate(@PathVariable("id")int id, Store store){
         Store storetemp = service.storedetail(id);
 

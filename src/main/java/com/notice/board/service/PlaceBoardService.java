@@ -1,6 +1,7 @@
 package com.notice.board.service;
 
 import com.notice.board.entity.Place;
+import com.notice.board.entity.Store;
 import com.notice.board.repository.PlaceBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,26 +22,31 @@ public class PlaceBoardService {
         this.repository = repository;
     }
 
-    public void placewrite(Place place, MultipartFile file) throws IOException {
+    public Place placewrite(Place place, MultipartFile file) throws IOException {
 
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\place";        // 파일 경로 저장
+        if(file.isEmpty()) {
+            Place save = repository.save(place);
+            return save;
+        }else{
+            String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files\\place";        // 파일 경로 저장
 
-        UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
+            UUID uuid = UUID.randomUUID();      // 식별자 , 파일 이름을 랜덤으로 저장하기 위해
 
-        String filename = uuid + "_" + file.getOriginalFilename();      // 파일 이름 변수에 랜덤이름 저장 => uuid(랜덤 이름)_업로드한파일명
+            String filename = uuid + "_" + file.getOriginalFilename();      // 파일 이름 변수에 랜덤이름 저장 => uuid(랜덤 이름)_업로드한파일명
 
-        File saveFile = new File(projectPath,filename);   // projectpath 경로에 name이름으로 저장할것
+            File saveFile = new File(projectPath, filename);   // projectpath 경로에 name이름으로 저장할것
 
-        file.transferTo(saveFile);
+            file.transferTo(saveFile);
 
-        place.setPlacefilename(filename);                   // 파일 이름  db 저장
-        place.setPlacefilepath("/files/place/"+filename);         // 파일 경로 db 저장
-
-        repository.save(place);
+            place.setPlacefilename(filename);                   // 파일 이름  db 저장
+            place.setPlacefilepath("/files/place/" + filename);         // 파일 경로 db 저장
+            Place save = repository.save(place);
+            return save;}
     }
 
-    public void placeeditwrite(Place place){
-        repository.save(place);
+    public Place placeeditwrite(Place place){
+        Place edit = repository.save(place);
+        return edit;
     }
 
     public List<Place> placelist(){

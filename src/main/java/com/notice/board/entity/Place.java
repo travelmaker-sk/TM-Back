@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity    // DB에 있는 테이블을 의미한다라는 것
 @Data
@@ -18,7 +19,7 @@ public class Place{
 
     private String placelocation;
     private String placename;
-    private String placedate;
+    private Date storedate = new Date(System.currentTimeMillis());
     private String placeweather;
     private String placescore;
     private String placememo;

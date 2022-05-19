@@ -1,22 +1,16 @@
 package com.notice.board.controller;
 
 import com.notice.board.entity.Place;
-import com.notice.board.entity.Store;
 import com.notice.board.service.PlaceBoardService;
-import com.notice.board.service.StoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 
-@Controller      //spring bean 사용하여 따로 설정했으므로 삭제해야함
+@RestController      //spring bean 사용하여 따로 설정했으므로 삭제해야함
 @RequestMapping(value="/place")
 public class PlaceBoardController {
 
@@ -49,6 +43,7 @@ public class PlaceBoardController {
         return "place/Placefindall";
     }
 
+
     @GetMapping("/finddetail")         // 게시물 클릭시 세부 페이지 이동
     public String findPlacedetail(Model model, int id){
 
@@ -75,7 +70,6 @@ public class PlaceBoardController {
 
         placetemp.setPlacename(place.getPlacename());       // 기존의 내용중 이름을 새로운 값으로 덮어씌움
         placetemp.setPlacelocation(place.getPlacelocation());
-        placetemp.setPlacedate(place.getPlacedate());
         placetemp.setPlaceweather(place.getPlaceweather());
         placetemp.setPlacescore(place.getPlacescore());
         placetemp.setPlacetag(place.getPlacetag());
