@@ -3,9 +3,11 @@ package com.notice.board.service;
 import com.notice.board.entity.Store;
 import com.notice.board.repository.StoreBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -44,21 +46,42 @@ public class StoreBoardService {
         return save;}
     }
 
+
+
     public Store storeeditwrite(Store store){
        Store edit = repository.save(store);
         return edit;
     }
 
-    public List<Store> storelist(){
-        return repository.findAll();
-    }
 
+    public Page<Store> storelist(Pageable pageable){
+        return repository.findAll(pageable);
+    }
+    // 게시물 세부 정보 확인용
     public Store storedetail(int id){
+        return repository.findById(id).get();
+    }
+    // 조회수 확인용
+    public Store storeview(long id){
+        return repository.findById(id).get();
+    }
+    // 게시물 수정 용
+    public Store storeeditdetail(int id){
         return repository.findById(id).get();
     }
 
     public void storedelete(int id){
-
         repository.deleteById(id);
     }
+
+    // 검색 기능
+//    public Page<Store> storesearchlist(String searchKeyword, Pageable pageable){
+//        return repository.findByTitleContaining(searchKeyword,pageable);
+//    }
+
+//    @Transactional
+//    public int updateView(Long id) {
+//        return repository.updateView(id);
+//    }
+
 }

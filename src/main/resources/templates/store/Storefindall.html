@@ -5,32 +5,46 @@
     <title>맛집 전체 출력</title>
 </head>
 <body>
-<table border="1">
+<table>
     <thead>
-    <tr>
-        <th>아이디</th>
-        <th>가게이름</th>
-        <th>위치</th>
-        <th>메뉴</th>
-        <th>가격</th>
-        <th>평점</th>
-        <th>태그</th>
-    </tr>
+    <p th:each="information:${list}">
+        <tr>
+            <th><a th:href="@{/store/finddetail(id=${information.storeid})}"><img th:src="@{${information.storefilepath}}" height="150" width="180"/></a></th>
+        </tr>
+        <tr>
+            <th><a th:text="${information.storetag}" th:href="@{/store/finddetail(id=${information.storeid})}"></a></th>
+        </tr>
+    </p>
+    <!--    <tr>-->
+    <!--        <th>가게이름</th>-->
+    <!--        <th>위치</th>-->
+    <!--        <th>메뉴</th>-->
+    <!--        <th>가격</th>-->
+    <!--        <th>평점</th>-->
+    <!--        <th>태그</th>-->
+    <!--    </tr>-->
     </thead>
-    <tbody>
-         <!-- information 변수안에 data를 for:each문을 통해 모든 값을 반복하여 넣는다. -->
-         <tr th:each ="information : ${list}">
-        <td th:text="${information.storeid}"></td>      <!-- information변수안에 id값을 넣는다. -->
-        <td>
-            <a  th:text="${information.storename}" th:href="@{/store/finddetail(id=${information.storeid})}"></a>
-        </td>
-        <td th:text="${information.storelocation}"></td>
-        <td th:text="${information.storemenu}"></td>
-        <td th:text="${information.storeprice}"></td>
-        <td th:text="${information.storescore}"></td>
-        <td th:text="${information.storetag}"></td>
-    </tr>
-    </tbody>
+    <!--    <tbody>-->
+    <!--         &lt;!&ndash; information 변수안에 data를 for:each문을 통해 모든 값을 반복하여 넣는다. &ndash;&gt;-->
+    <!--         <tr th:each ="information : ${list}">-->
+    <!--            <td> <img th:src="@{${information.storefilepath}}" /></td>-->
+    <!--            <td><a th:text="${information.storetag}" th:href="@{/store/finddetail(id=${information.storeid})}"></a></td>-->
+    <!--&lt;!&ndash;        <td th:text="${information.storeid}"></td>      &lt;!&ndash; information변수안에 id값을 넣는다. &ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <a  th:text="${information.storename}" th:href="@{/store/finddetail(id=${information.storeid})}"></a>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storelocation}"></td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storemenu}"></td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storeprice}"></td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storescore}"></td>&ndash;&gt;-->
+    <!--    </tr>-->
+    <!--    </tbody>-->
 </table>
+
+<th:block th:each="page : ${#numbers.sequence(startpage,endpage)}">
+    <a th:if="${page != nowpage}" th:href="@{/store/findall(page=${page-1})}" th:text="${page}"></a>
+    <strong th:if="${page == nowpage}" th:text="${page}"  style="color: red"></strong>
+</th:block>
+
 </body>
 </html>

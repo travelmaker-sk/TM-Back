@@ -11,7 +11,16 @@
 <form action="/lodging/new" method="post" enctype="multipart/form-data">
     <input type="file" name="file"><br>
     숙소이름 : <input type="text" name="lodgingname">  <br>
-    숙소위치 : <input type="text" name="lodginglocation">  <br>
+    숙소위치 : <select name ="lodginglocaion" >
+    <option value="제주">제주</option>
+    <option value="부산">부산</option>
+    <option value="서울">서울</option>
+    <option value="인천">인천</option>
+    <option value="속초">속초</option>
+    <option value="강릉">강릉</option>
+    <option value="여수">여수</option>
+    </select>                               <!--<input type="text" name="communitykind">  <br>-->
+    <br>
     가격 : <input type="text" name="lodgingprice">  <br>
     평점 : <input trpe="text" name="lodgingscore">  <br>
     메모 : <input type="text" name="lodgingmemo">  <br>

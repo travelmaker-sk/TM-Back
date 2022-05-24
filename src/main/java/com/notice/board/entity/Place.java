@@ -19,7 +19,7 @@ public class Place{
 
     private String placelocation;
     private String placename;
-    private Date storedate = new Date(System.currentTimeMillis());
+    private Date placedate = new Date(System.currentTimeMillis());
     private String placeweather;
     private String placescore;
     private String placememo;

@@ -25,5 +25,6 @@ public class Store{
     private String storefilename;
     private String storefilepath;
     private String storescore;
+    private int storeviewcount;
     private Date storedate = new Date(System.currentTimeMillis());
 }
