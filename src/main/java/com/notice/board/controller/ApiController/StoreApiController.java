@@ -60,7 +60,7 @@
 //
 //
 //    @PostMapping("/new")           // 게시글 작성
-//    public ResponseEntity<Store> createStoreData(Store store,MultipartFile file) throws IOException {
+//    public ResponseEntity<Store> createStoreData(@RequestBody Store store,MultipartFile file) throws IOException {
 //
 //        Store write =service.storewrite(store,file);
 //

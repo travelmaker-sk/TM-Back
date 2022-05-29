@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>맛집 전체 출력</title>
+</head>
+<body>
+<table>
+    <thead>
+    <p th:each="information:${list}">
+        <tr>
+            <th><a th:href="@{/total/finddetail(id=${information.totalid})}"><img th:src="|/upload/${information.totalfile}|" height="150" width="180"/></a></th>
+        </tr>
+        <tr>
+            <th><a th:text="${information.totaltag}" th:href="@{/total/finddetail(id=${information.totalid})}"></a></th>
+        </tr>
+    </p>
+    <!--    <tr>-->
+    <!--        <th>가게이름</th>-->
+    <!--        <th>위치</th>-->
+    <!--        <th>메뉴</th>-->
+    <!--        <th>가격</th>-->
+    <!--        <th>평점</th>-->
+    <!--        <th>태그</th>-->
+    <!--    </tr>-->
+    </thead>
+    <!--    <tbody>-->
+    <!--         &lt;!&ndash; information 변수안에 data를 for:each문을 통해 모든 값을 반복하여 넣는다. &ndash;&gt;-->
+    <!--         <tr th:each ="information : ${list}">-->
+    <!--            <td> <img th:src="@{${information.storefilepath}}" /></td>-->
+    <!--            <td><a th:text="${information.storetag}" th:href="@{/store/finddetail(id=${information.storeid})}"></a></td>-->
+    <!--&lt;!&ndash;        <td th:text="${information.storeid}"></td>      &lt;!&ndash; information변수안에 id값을 넣는다. &ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <a  th:text="${information.storename}" th:href="@{/store/finddetail(id=${information.storeid})}"></a>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storelocation}"></td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storemenu}"></td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storeprice}"></td>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <td th:text="${information.storescore}"></td>&ndash;&gt;-->
+    <!--    </tr>-->
+    <!--    </tbody>-->
+</table>
+
+<th:block th:each="page : ${#numbers.sequence(startpage,endpage)}">
+    <a th:if="${page != nowpage}" th:href="@{/total/findall/lodging(page=${page-1})}" th:text="${page}"></a>
+    <strong th:if="${page == nowpage}" th:text="${page}"  style="color: red"></strong>
+</th:block>
+
+</body>
+</html>

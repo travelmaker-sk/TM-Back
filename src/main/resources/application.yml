@@ -10,6 +10,20 @@ spring:
   output:
     ansi:
       enabled: always
+  servlet:
+    multipart:
+      location: c:\\Temp\\spring\\project
+      max-file-size: 10MB
+      max-request-size: 50MB
 logging:
   level:
     org.hibernate.type: trace
+
+resource:
+  path: file:///c:/Temp/spring/project/
+
+upload:
+  path: /upload/**
+
+file:
+  dir: c:\\Temp\\spring\\project

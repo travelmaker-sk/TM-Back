@@ -25,5 +25,5 @@ public class Lodging{
     private String lodgingtag;
     private String lodgingfilename;
     private String lodgingfilepath;
-    private Date storedate = new Date(System.currentTimeMillis());
+    private Date lodgingdate = new Date(System.currentTimeMillis());
 }

@@ -61,6 +61,7 @@ public class StoreBoardService {
     public Store storedetail(int id){
         return repository.findById(id).get();
     }
+
     // 조회수 확인용
     public Store storeview(long id){
         return repository.findById(id).get();

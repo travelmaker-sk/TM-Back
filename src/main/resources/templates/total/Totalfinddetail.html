@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>맛집 상세 페이지</title>
+</head>
+<body>
+<img th:src="|/upload/${data.totalfile}|"   height="150" width="180"/>
+<!-- <a th:href="@{${data.storefilepath}}">다운받기</a>     변수는 ${변수}로 감싸줘야 한다.  -->
+<p th:text="'ID : '+${data.totalid}"></p>   <!-- ""안에 ''사용하여 메세지 출력과 thymeleaf사용하여 값 출력 , member는 controller에서 설정한 객체 이름 -->
+<p th:text="'가게이름 : '+${data.totalname}"></p>
+<p th:text="'가게위치 : '+${data.totallocation}"></p>
+<p th:text="'목적 : '+${data.totalsubject}"></p>
+<p th:text="'메뉴 : '+${data.totalmenu}"></p>
+<p th:text="'가격 : '+${data.totalprice}"></p>
+<p th:text="'평점 : '+${data.totalscore}"></p>
+<p th:text="'태그 : '+${data.totaltag}"></p><hr>
+<p th:text="'조회수 : '+${data.totalviewcount}"></p><hr>
+
+
+<form name="likedata" th:action="@{/total/finddetail/{id}(id=${data.totalid})}" method="post">
+    <input type = "hidden" name ="totalbookmark" id="totalbookmark" value="">
+    <button type="submit" onclick="send()">좋아요</button></form>
+<button><a th:href="@{/total/modify/{id}(id=${data.totalid})}">수정</a></button>
+<button><a th:href="@{/total/delete(id=${data.totalid})}">삭제</a></button>
+
+<script>
+    function send(){
+        var like = document.likedata;
+        document.getElementById("totalbookmark").value='1';
+        like.submit();
+    }
+</script>
+
+</body>
+</html>
