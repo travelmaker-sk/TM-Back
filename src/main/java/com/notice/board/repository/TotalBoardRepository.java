@@ -1,7 +1,5 @@
 package com.notice.board.repository;
 
-
-import com.notice.board.entity.Store;
 import com.notice.board.entity.Total;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,18 +19,23 @@ public interface TotalBoardRepository extends JpaRepository<Total,Object> {
 //    @Query("update Store s set s.storeviewcount = s.storeviewcount + 1 where s.storeid = :storeid")
 //    Integer updateView(Long id);
 
-    @Query(value = "select *from total where totalsubject=?", nativeQuery = true)
+    // 명소 게시판
+    @Query(value = "select *from total where category=?", nativeQuery = true)
     Page<Total> selectAllSQL(String subject, Pageable pageable);
 
-//    @Query(value = "update total set totalbookmark=? where totalid=?", nativeQuery = true)
-  //  String like(@Param("bookmark")String bookmark,@Param("id") int id);
+    // 숙소 게시판
+    @Query(value = "select *from total where category=?", nativeQuery = true)
+    Page<Total> selectlodging(String subject, Pageable pageable);
 
-//    @Query(value = "select *from total where totaltag=?", nativeQuery = true)
-//    List<Total> findtaglist(String keyword);
+    // 맛집 게시판
+    @Query(value = "select *from total where category=?", nativeQuery = true)
+    Page<Total> selectstore(String subject, Pageable pageable);
 
-      List<Total> findByTotallocation(String locationkey);
-      List<Total> findByTotalsubject(String subjectkey);
-      List<Total> findByTotaltagContains(@Param("keyword")String keyword);
+
+
+  //    List<Total> findByTotallocationContains(String locationword);
+   //   List<Total> findByTotalsubjectContains(String subjectword);
+  Page<Total> findByTagContains(@Param("tag")String tag,Pageable pageable);
 
  //   List<Total> findByTotallocation(String locationkey);
 

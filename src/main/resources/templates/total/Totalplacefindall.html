@@ -9,10 +9,10 @@
     <thead>
     <p th:each="information:${list}">
         <tr>
-            <th><a th:href="@{/total/finddetail(id=${information.totalid})}"><img th:src="|/upload/${information.totalfile}|" height="150" width="180"/></a></th>
+            <th><a th:href="@{/total/finddetail/{id}(id=${information.idx})}"><img th:src="|/upload/${information.filename}|" height="150" width="180"/></a></th>
         </tr>
         <tr>
-            <th><a th:text="${information.totaltag}" th:href="@{/total/finddetail(id=${information.totalid})}"></a></th>
+            <th><a th:text="${information.tag}" th:href="@{/total/finddetail(id=${information.idx})}"></a></th>
         </tr>
     </p>
     <!--    <tr>-->

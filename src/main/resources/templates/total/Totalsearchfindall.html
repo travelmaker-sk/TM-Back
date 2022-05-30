@@ -7,12 +7,12 @@
 <body>
 <table>
     <thead>
-    <p th:each="imformation:${searchList}">
+    <p th:each="information:${list}">
         <tr>
-            <th><a th:href="@{/total/finddetail(id=${imformation.totalid})}"><img th:src="|/upload/${imformation.totalfile}|" height="150" width="180"/></a></th>
+            <th><a th:href="@{/total/finddetail/{id}(id=${information.idx})}"><img th:src="|/upload/${information.filename}|" height="150" width="180"/></a></th>
         </tr>
         <tr>
-            <th><a th:text="${imformation.totaltag}" th:href="@{/total/finddetail(id=${imformation.totalid})}"></a></th>
+            <th><a th:text="${information.tag}" th:href="@{/total/finddetail(id=${information.idx})}"></a></th>
         </tr>
     </p>
     <!--    <tr>-->
@@ -41,10 +41,10 @@
     <!--    </tbody>-->
 </table>
 
-<!--<th:block th:each="page : ${#numbers.sequence(startpage,endpage)}">-->
-<!--    <a th:if="${page != nowpage}" th:href="@{/total/findall(page=${page-1})}" th:text="${page}"></a>-->
-<!--    <strong th:if="${page == nowpage}" th:text="${page}"  style="color: red"></strong>-->
-<!--</th:block>-->
+<th:block th:each="page : ${#numbers.sequence(startpage,endpage)}">
+    <a th:if="${page != nowpage}" th:href="@{/total/search(page=${page-1})}" th:text="${page}"></a>
+    <strong th:if="${page == nowpage}" th:text="${page}"  style="color: red"></strong>
+</th:block>
 
 </body>
 </html>

@@ -49,11 +49,12 @@ public class TotalBoardService {
             //파일전송
             file.transferTo(saveFile);
 
-            total.setTotalfile(fileName);
+            total.setFilename(fileName);
+            //total.setTotalfile(fileName);
 
             repository.save(total);
         } else {
-            total.setTotalfile(null);
+            total.setFilename(null);
             repository.save(total);
         }
     }
@@ -85,31 +86,40 @@ public class TotalBoardService {
         repository.deleteById(id);
     }
 
-    // 목적에 맞는 게시물 출력
+    // 목적에 맞는 게시물 출력 (명소)
     public Page<Total> selectAllSQL(String subject, Pageable pageable){
         return repository.selectAllSQL(subject, pageable);
+    }
+
+    public Page<Total> selectlodging(String subject, Pageable pageable){
+        return repository.selectlodging(subject, pageable);
+    }
+
+    public Page<Total> selectstore(String subject, Pageable pageable){
+        return repository.selectstore(subject, pageable);
     }
 
 //    public List<Total> findtaglist(String keyword){
 //        return repository.findtaglist(keyword);
 //    }
 
+    /*
     @Transactional
-    public List<Total> locationsearch(String locationkey) {
-        List<Total> searchlist = repository.findByTotallocation(locationkey);
+    public List<Total> locationsearch(String locationword) {
+        List<Total> searchlist = repository.findByTotallocation(locationword);
         return searchlist;
     }
 
     @Transactional
-    public List<Total> subjectsearch(String subjectkey) {
-        List<Total> searchlist = repository.findByTotalsubject(subjectkey);
+    public List<Total> subjectsearch(String subjectword) {
+        List<Total> searchlist = repository.findByTotalsubject(subjectword);
         return searchlist;
     }
+    */
 
     @Transactional
-    public List<Total> tagsearch(String keyword) {
-        List<Total> searchlist = repository.findByTotaltagContains(keyword);
-        return searchlist;
+    public Page<Total> tagsearch(String tag,Pageable pageable) {
+        return repository.findByTagContains(tag,pageable);
     }
 
 

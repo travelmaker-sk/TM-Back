@@ -13,27 +13,36 @@ public class Total {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int totalid;
+    private int idx;
 
 
-    private String totalname;
-    private String totalsubject;
-    private String totallocation;
-    private String totalmenu;
-    private int totalprice;
-    private Date totaltraveldate;       // 작성자가 여행한 날짜
-    private String totaltag;
-    private String totalscore;
-    private int totalviewcount;
-    private String totalbookmark;
-    private LocalDate totaldate;
-    private String totalfile;
-    private String totalwriter;
+    private int price;
+    private int viewcount;
+
+    private String score;
+    private String title;
+    private String location;
+    private String memo;
+    private String tag;
+    private String filename;
+    private String date;
+    private String liked;
+    private String username;
+    private String useremail;
+    private String profileimage;
+    private String category;
+    private LocalDate createdate;    // 작성자가 여행한 날짜
+    private String weather;
+    private String menu;
+
 
     @PrePersist
     public void localAboutDate(){
-        this.totaldate = LocalDate.now();
+        this.createdate = LocalDate.now();
+        //this.date = String.valueOf(LocalDate.now());
     }
+
+
 
 //    @Builder
 //    public Total(int totalid, String totalname, String totalsubject, String totallocation, String totalmenu,int totalprice,
