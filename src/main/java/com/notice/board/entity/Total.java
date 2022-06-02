@@ -23,8 +23,8 @@ public class Total {
     private String title;
     private String location;
     private String memo;
-    private String tag;
-    private String filename;
+    private String tagList;
+    private String imageUrl;
     private String date;
     private String liked;
     private String username;
