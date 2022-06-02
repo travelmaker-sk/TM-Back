@@ -1,5 +1,6 @@
 package com.notice.board.service;
 
+import com.notice.board.entity.Liked;
 import com.notice.board.entity.Store;
 import com.notice.board.entity.Total;
 import com.notice.board.repository.StoreBoardRepository;
@@ -32,9 +33,10 @@ public class TotalBoardService {
 
     public void totalwrite(Total total, MultipartFile file) throws IOException {
         //파일의 저장경로를 위한 경로설정
-        boolean noneFIle = file.isEmpty();
+//        boolean noneFIle = file.isEmpty();
 
-        if (!noneFIle) {
+        if (file != null) {
+            System.out.println("파일 업로드");
             String path = fileDir;
 
             //이미지파일 중복을 방지하기위해 uuid설정
@@ -49,20 +51,21 @@ public class TotalBoardService {
             //파일전송
             file.transferTo(saveFile);
 
-            total.setFilename(fileName);
+            total.setImageUrl(fileName);
             //total.setTotalfile(fileName);
 
             repository.save(total);
-        } else {
-            total.setFilename(null);
+        } else if(file == null) {
+            System.out.println("파일 업로드 실패");
+            total.setImageUrl(null);
             repository.save(total);
         }
     }
 
 
-    public Total totaleditwrite(Total total){
-       Total edit = repository.save(total);
-        return edit;
+    public Total save(Total total){
+
+        return repository.save(total);
     }
 
     public Page<Total> totallist(Pageable pageable){
@@ -118,11 +121,13 @@ public class TotalBoardService {
     */
 
     @Transactional
-    public Page<Total> tagsearch(String tag,Pageable pageable) {
-        return repository.findByTagContains(tag,pageable);
+    public Page<Total> tagsearch(String tagList,Pageable pageable) {
+        return repository.findByTagListContains(tagList,pageable);
     }
 
-
+    public int updateview(int id){
+        return repository.updateview(id);
+    }
     /*
     @Transactional
     public List<Total> locationsearch(String locationkey) {

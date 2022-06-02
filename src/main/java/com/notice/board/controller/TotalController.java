@@ -1,7 +1,11 @@
 package com.notice.board.controller;
 
 
+import com.notice.board.entity.Bookmark;
+import com.notice.board.entity.Liked;
 import com.notice.board.entity.Total;
+import com.notice.board.service.BookMarkService;
+import com.notice.board.service.LikeService;
 import com.notice.board.service.TotalBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,10 +25,14 @@ import java.util.List;
 public class TotalController {
 
     TotalBoardService service;
+    LikeService likeService;
+    BookMarkService bookMarkService;
 
     @Autowired
-    public TotalController(TotalBoardService service) {         // controller와 service 연결하는 느낌
+    public TotalController(TotalBoardService service, LikeService likeService,BookMarkService bookMarkService) {         // controller와 service 연결하는 느낌
         this.service = service;
+        this.likeService = likeService;
+        this.bookMarkService = bookMarkService;
     }
 
 
@@ -182,18 +190,89 @@ public class TotalController {
 
 
     @GetMapping("/finddetail/{id}")         // 게시물 클릭시 세부 페이지 이동
-    public String findTotaldetail(Model model, @PathVariable(value = "id") int id, Total total) {
-        Total view = service.totaldetail(id);
+    public String findTotaldetail(Model model, @PathVariable(value = "id") int id) {
 
-    //    int result = view.getViewCount();
-     //   view.setViewCount((result + 1));
-       // int result = view.getTotalviewcount();
-       // view.setTotalviewcount(result + 1);
+        // like 갯수 출력
+        String result = "true";
+        List<Liked> likelist = likeService.findByTotalidAndPoint(id,result);
+        model.addAttribute("like",likelist.size());
+
+        // 조회수 출력
+        Total viewtemp = service.totaldetail(id);
+        int temp = viewtemp.getViewcount();
+        temp++;
+        viewtemp.setViewcount(temp);
+        service.save(viewtemp);
+        model.addAttribute("view",viewtemp.getViewcount());
+
+        // 게시물 data 출력
         model.addAttribute("data", service.totaldetail(id));
 
         return "total/Totalfinddetail";
     }
 
+    @GetMapping("/like/{id}")         // 게시물 좋아요
+    public String like(Model model, @PathVariable(value = "id") int id, Liked liked) {
+
+        String name = "홍길동";            // 세션 연결전 아이디 디폴트값
+        boolean result = likeService.check(id,name);     // db에 데이터가 있는지 유무 확인
+
+        if(result != false){
+            liked.setTotalid(id);
+            liked.setUsername(name);
+            Liked datalist = likeService.like(id,name);       // where totalid and username을 통한 값 저장
+            if(datalist.getPoint().equals("false")){
+                Liked temp = likeService.likefindByTotalid(id,name);
+                System.out.println("1");
+                liked.setPoint("true");
+                temp.setPoint(liked.getPoint());
+                likeService.likesave(temp);
+            }else if(datalist.getPoint().equals("true")){
+                Liked temp = likeService.likefindByTotalid(id,name);
+                System.out.println("2");
+                liked.setPoint("false");
+                temp.setPoint(liked.getPoint());
+                likeService.likesave(temp);
+            }
+        }else{
+            liked.setTotalid(id);
+            liked.setUsername(name);
+                System.out.println("3");
+                liked.setPoint("true");
+                likeService.likesave(liked);
+        }
+        return "redirect:/total/finddetail/{id}";
+    }
+
+    @GetMapping("/bookmark/{id}")         // 게시물 북마크
+    public String bookmark(Model model, @PathVariable(value = "id") int id, Bookmark bookmark) {
+
+        String name = "홍길동";            // 세션 연결전 아이디 디폴트값
+        boolean result = bookMarkService.check(id,name);     // db에 데이터가 있는지 유무 확인
+
+        if(result != false){
+            bookmark.setTotalid(id);
+            bookmark.setUsername(name);
+            Bookmark datalist = bookMarkService.bookmark(id,name);       // where totalid and username을 통한 값 저장
+            if(datalist.getBookmark().equals("false")){
+                Bookmark temp = bookMarkService.bookmarkfindByTotalid(id,name);
+                bookmark.setBookmark("true");
+                temp.setBookmark(bookmark.getBookmark());
+                bookMarkService.bookmarksave(temp);
+            }else if(datalist.getBookmark().equals("true")){
+                Bookmark temp = bookMarkService.bookmarkfindByTotalid(id,name);
+                bookmark.setBookmark("false");
+                temp.setBookmark(bookmark.getBookmark());
+                bookMarkService.bookmarksave(temp);
+            }
+        }else{
+            bookmark.setTotalid(id);
+            bookmark.setUsername(name);
+            bookmark.setBookmark("true");
+            bookMarkService.bookmarksave(bookmark);
+        }
+        return "redirect:/total/finddetail/{id}";
+    }
 
     @GetMapping("/delete")         // 게시물 삭제
     public String Totaldelete(int id) {
@@ -209,16 +288,22 @@ public class TotalController {
 
 
     @PostMapping("/update/{id}")        // 게시물 수정
-    public String Storeupdate(@PathVariable("id") int id, Total total) {
+    public String Totalupdate(@PathVariable("id") int id, Total total, MultipartFile file) throws IOException {
         Total temp = service.totaleditdetail(id);
 
+        System.out.println(temp.getImageUrl());
+        System.out.println(file);
         temp.setTitle(total.getTitle());       // 기존의 내용중 이름을 새로운 값으로 덮어씌움
         temp.setLocation(total.getLocation());
+        temp.setMemo(total.getMemo());
+        temp.setDate(total.getDate());
+        temp.setWeather(total.getWeather());
         temp.setMenu(total.getMenu());
         temp.setPrice(total.getPrice());
         temp.setScore(total.getScore());
-        temp.setTag(total.getTag());
+        temp.setTagList(total.getTagList());
         temp.setCategory(total.getCategory());
+
 
         /*
         totaltemp.setTotalname(total.getTotalname());       // 기존의 내용중 이름을 새로운 값으로 덮어씌움
@@ -229,16 +314,17 @@ public class TotalController {
         totaltemp.setTotaltag(total.getTotaltag());
         totaltemp.setTotalsubject(total.getTotalsubject());
         */
-        service.totaleditwrite(temp);
+        service.totalwrite(temp,file);
         return "redirect:/total/findall";
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam(value = "tag") String tag, Model model,
+    public String search(@RequestParam(value = "tagList") String tagList, Model model,
                          @PageableDefault(page = 0, size = 3, sort = "idx", direction = Sort.Direction.DESC)Pageable pageable) {            // 객체로 받을때는 @ModelAttribute 사용
 
 
-        Page<Total> searchtagList = service.tagsearch(tag,pageable);
+        Page<Total> searchtagList = service.tagsearch(tagList,pageable);
+
 
         int nowpage = searchtagList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
         int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
@@ -250,26 +336,10 @@ public class TotalController {
         model.addAttribute("startpage", startpage);
         model.addAttribute("endpage", endpage);
 
+
         return "total/Totalsearchfindall";
 
-        // findBy[ ]를 통한 검색기능
-        /*
-        List<Total> searchlocationList = service.locationsearch(search.getLocationkey());
-        List<Total> searchsubjectList = service.subjectsearch(search.getSubjectkey(),search.getLocationkey());
-        List<Total> searchtagList = service.tagsearch(search.getTagkey(),search.getLocationkey(),search.getSubjectkey());
-
-        if(search.getLocationkey() != null) {
-            model.addAttribute("searchList", searchlocationList);
-        }
-        if(search.getSubjectkey() != null) {
-            model.addAttribute("searchList", searchsubjectList);
-        }
-        if(search.getTagkey() != null){
-            model.addAttribute("searchList",searchtagList);
-            }
-        return "total/Totalsearchfindall";
-        }
-
-         */
     }
+
+
 }
