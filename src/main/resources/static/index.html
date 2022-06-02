@@ -18,7 +18,14 @@
             <option value="맛집">맛집</option>
             <option value="명소">명소</option>
         </select><br>                   -->
-    <input type="text" name="tag" placeholder="태그 검색">
+    <input type="text" name="search[]" placeholder="위치 검색">
+        <select name ="search[]" >
+            <option value="">선택</option>
+            <option value="숙소">숙소</option>
+            <option value="맛집">맛집</option>
+            <option value="명소">명소</option>
+        </select><br>
+        <input type="text" name="tagList" placeholder="태그 검색">
     <button>검색하기</button>
     </form>
     <!--    <a href="/store/new">맛집 게시물 작성</a>-->
