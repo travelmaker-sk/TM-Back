@@ -26,9 +26,7 @@ public interface TotalBoardRepository extends JpaRepository<Total,Object> {
 
     // 명소 게시판
     @Query(value = "select *from total where category=?", nativeQuery = true)
-    Page<Total> selectAllSQL(String subject, Pageable pageable);
-
-
+    Page<Total> selectAllSQL(@Param("subject")String subject, Pageable pageable);
 
     // 숙소 게시판
     @Query(value = "select *from total where category=?", nativeQuery = true)
@@ -39,13 +37,9 @@ public interface TotalBoardRepository extends JpaRepository<Total,Object> {
     Page<Total> selectstore(String subject, Pageable pageable);
 
 
-  //    List<Total> findByTotallocationContains(String locationword);
-   //   List<Total> findByTotalsubjectContains(String subjectword);
-  Page<Total> findByTagListContains(@Param("tagList")String tagList,Pageable pageable);
+  Page<Total> findByTagListContains(@Param("what")String searchtag,Pageable pageable);
 
- //   List<Total> findByTotallocation(String locationkey);
+  Page<Total> findByLocationContains(@Param("where")String searchlocation,Pageable pageable);
 
-    List<Total> findByCategoryAndLocation(@Param("search[0]")String subjectkey,@Param("search[1]")String locationkey);
-
- //   List<Total> findByTotaltagANDTotallacationANDTotalsubject(String tagkey, String locationkey,String subjectkey);
+  Page<Total> findByLocationAndTagListContains(@Param("what")String searchtag,@Param("where")String searchlocation,Pageable pageable);
 }

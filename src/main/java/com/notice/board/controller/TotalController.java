@@ -1,6 +1,6 @@
 package com.notice.board.controller;
 
-
+import antlr.StringUtils;
 import com.notice.board.entity.Bookmark;
 import com.notice.board.entity.Liked;
 import com.notice.board.entity.Total;
@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,18 +48,34 @@ public class TotalController {
     public String createData(Total total, MultipartFile file) throws IOException {
 
         // 시큐리티 유저 데이터 받아오는 방식
-   //     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-   //     PrincipalDetail principalDetail = (PrincipalDetail)principal;
-   //     String username = principalDetail.getUsername();
+        //     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //     PrincipalDetail principalDetail = (PrincipalDetail)principal;
+        //     String username = principalDetail.getUsername();
 
         service.totalwrite(total, file);
         return "redirect:/ ";    // 제일 첫 페이지로 돌아감
     }
 
     @GetMapping("/findall")                // 게시글 전체 출력
-    public String findAll(Model model, @PageableDefault(page = 0, size = 3, sort = "idx", direction = Sort.Direction.DESC)
-            Pageable pageable, Total total) {
+    public String findAll(@RequestParam(value = "where", required = false)@Nullable String searchlocation, @RequestParam(value = "what",required = false)@Nullable String searchtag,
+                          Model model, @PageableDefault(page = 0, size = 3, sort = "idx", direction = Sort.Direction.DESC) Pageable pageable, Total total) {
 
+        if(searchtag == null && searchlocation == null) {
+            Page<Total> list = service.totallist(pageable);
+
+            int nowpage = list.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, list.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", list);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+
+        if(searchtag == "" && searchlocation == "") {
         Page<Total> list = service.totallist(pageable);
 
         int nowpage = list.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
@@ -70,7 +87,49 @@ public class TotalController {
         model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
         model.addAttribute("startpage", startpage);
         model.addAttribute("endpage", endpage);
+        }
+        else if(searchtag != null && searchlocation == "" ){
+            Page<Total> searchtagList = service.tagsearch(searchtag,pageable);
 
+            int nowpage = searchtagList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchtagList.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchtagList);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag == ""){
+            Page<Total> searchlocationList = service.locationsearch(searchlocation,pageable);
+
+            int nowpage = searchlocationList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchlocationList.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchlocationList);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag != null){
+            Page<Total> searchtotalList = service.totalsearch(searchlocation,searchtag,pageable);
+
+            int nowpage = searchtotalList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchtotalList.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchtotalList);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else{
+            System.out.println("fail");
+        }
         return "total/Totalfindall";
     }
 
@@ -103,7 +162,6 @@ public class TotalController {
 
 
         String subject = "명소";
-
 
         Page<Total> list = service.selectAllSQL(subject, pageable);
 
@@ -223,13 +281,11 @@ public class TotalController {
             Liked datalist = likeService.like(id,name);       // where totalid and username을 통한 값 저장
             if(datalist.getPoint().equals("false")){
                 Liked temp = likeService.likefindByTotalid(id,name);
-                System.out.println("1");
                 liked.setPoint("true");
                 temp.setPoint(liked.getPoint());
                 likeService.likesave(temp);
             }else if(datalist.getPoint().equals("true")){
                 Liked temp = likeService.likefindByTotalid(id,name);
-                System.out.println("2");
                 liked.setPoint("false");
                 temp.setPoint(liked.getPoint());
                 likeService.likesave(temp);
@@ -237,9 +293,8 @@ public class TotalController {
         }else{
             liked.setTotalid(id);
             liked.setUsername(name);
-                System.out.println("3");
-                liked.setPoint("true");
-                likeService.likesave(liked);
+            liked.setPoint("true");
+            likeService.likesave(liked);
         }
         return "redirect:/total/finddetail/{id}";
     }
@@ -317,29 +372,5 @@ public class TotalController {
         service.totalwrite(temp,file);
         return "redirect:/total/findall";
     }
-
-    @GetMapping("/search")
-    public String search(@RequestParam(value = "tagList") String tagList, Model model,
-                         @PageableDefault(page = 0, size = 3, sort = "idx", direction = Sort.Direction.DESC)Pageable pageable) {            // 객체로 받을때는 @ModelAttribute 사용
-
-
-        Page<Total> searchtagList = service.tagsearch(tagList,pageable);
-
-
-        int nowpage = searchtagList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
-        int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
-        // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
-        int endpage = Math.min(nowpage + 5, searchtagList.getTotalPages()); // 마지막 페이지까지 출력
-
-        model.addAttribute("list", searchtagList);
-        model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
-        model.addAttribute("startpage", startpage);
-        model.addAttribute("endpage", endpage);
-
-
-        return "total/Totalsearchfindall";
-
-    }
-
 
 }

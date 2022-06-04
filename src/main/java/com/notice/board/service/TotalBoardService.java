@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -94,13 +95,13 @@ public class TotalBoardService {
         return repository.selectAllSQL(subject, pageable);
     }
 
-    public Page<Total> selectlodging(String subject, Pageable pageable){
-        return repository.selectlodging(subject, pageable);
-    }
-
-    public Page<Total> selectstore(String subject, Pageable pageable){
-        return repository.selectstore(subject, pageable);
-    }
+//    public Page<Total> selectlodging(String subject, Pageable pageable){
+//        return repository.selectlodging(subject, pageable);
+//    }
+//
+//    public Page<Total> selectstore(String subject, Pageable pageable){
+//        return repository.selectstore(subject, pageable);
+//    }
 
 //    public List<Total> findtaglist(String keyword){
 //        return repository.findtaglist(keyword);
@@ -119,10 +120,21 @@ public class TotalBoardService {
         return searchlist;
     }
     */
-
+    
+    // 태그를 통한 검색
     @Transactional
-    public Page<Total> tagsearch(String tagList,Pageable pageable) {
-        return repository.findByTagListContains(tagList,pageable);
+    public Page<Total> tagsearch(String seactchtag,Pageable pageable) {
+        return repository.findByTagListContains(seactchtag,pageable);
+    }
+    // 지역을 통한 검색
+    @Transactional
+    public Page<Total> locationsearch(String seactchlocation,Pageable pageable) {
+        return repository.findByLocationContains(seactchlocation,pageable);
+    }
+    // 태그,지역을 통한 검색
+    @Transactional
+    public Page<Total> totalsearch(String searchtag, String searchlocation, Pageable pageable){
+        return repository.findByLocationAndTagListContains(searchtag,searchlocation,pageable);
     }
 
     public int updateview(int id){
