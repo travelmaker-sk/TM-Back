@@ -53,6 +53,7 @@ public class TotalController {
         //     String username = principalDetail.getUsername();
 
         service.totalwrite(total, file);
+        System.out.println("sdsdssds");
         return "redirect:/ ";    // 제일 첫 페이지로 돌아감
     }
 

@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/test
     driver-class-name: org.h2.Driver
-    username: sa
+    username: wook
   jpa:
     show-sql: true
     hibernate:
@@ -15,6 +15,27 @@ spring:
       location: c:\\Temp\\spring\\project
       max-file-size: 10MB
       max-request-size: 50MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tlsdnr1135@gmail.com
+    password: dzttznweflyarczo
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 252064972785-m47ooj5vno4plmm5ehlh6202sf1p63ha.apps.googleusercontent.com
+            client-secret: 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
+            scope: email,profile
+
 logging:
   level:
     org.hibernate.type: trace
@@ -27,3 +48,5 @@ upload:
 
 file:
   dir: c:\\Temp\\spring\\project
+
+#메일

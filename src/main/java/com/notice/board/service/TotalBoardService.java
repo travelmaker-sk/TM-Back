@@ -51,7 +51,8 @@ public class TotalBoardService {
 
             total.setImageUrl(fileName);
             //total.setTotalfile(fileName);
-
+            System.out.println("sdsdsdsd");
+            System.out.println(total);
             repository.save(total);
         } else if(file == null) {
             System.out.println("파일 업로드 실패");
