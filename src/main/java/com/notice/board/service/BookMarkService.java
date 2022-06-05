@@ -43,4 +43,7 @@ public class BookMarkService {
         return repository.existsByTotalidAndUsername(id,name);
     }
 
+    public List<Bookmark> mypagebook(String name,String bookmark){
+        return repository.mypagebook(name,bookmark);
+    }
 }

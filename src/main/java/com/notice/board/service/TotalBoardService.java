@@ -1,15 +1,12 @@
 package com.notice.board.service;
 
-import com.notice.board.entity.Liked;
-import com.notice.board.entity.Store;
+
 import com.notice.board.entity.Total;
-import com.notice.board.repository.StoreBoardRepository;
 import com.notice.board.repository.TotalBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,6 +90,11 @@ public class TotalBoardService {
     // 목적에 맞는 게시물 출력 (명소)
     public Page<Total> selectAllSQL(String subject, Pageable pageable){
         return repository.selectAllSQL(subject, pageable);
+    }
+
+    // 마이페이지
+    public List<Total> mypage(String location,String name){
+        return repository.mypage(location,name);
     }
 
 //    public Page<Total> selectlodging(String subject, Pageable pageable){

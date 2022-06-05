@@ -36,6 +36,9 @@ public interface TotalBoardRepository extends JpaRepository<Total,Object> {
     @Query(value = "select *from total where category=?", nativeQuery = true)
     Page<Total> selectstore(String subject, Pageable pageable);
 
+    // 마이페이지 자신이 작성한 게시물
+    @Query(value = "select *from total where location=? and username=? order by idx ", nativeQuery = true)
+    List<Total> mypage(String location,String name);
 
   Page<Total> findByTagListContains(@Param("what")String searchtag,Pageable pageable);
 

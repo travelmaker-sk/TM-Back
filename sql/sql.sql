@@ -93,6 +93,7 @@ CREATE TABLE BOOKMARK
     totalid NUMBER(10),
     username VARCHAR2(100),
     bookmark VARCHAR2(10),
+    title VARCHAR2(10),
     PRIMARY KEY (idx)
 );
 
@@ -103,7 +104,7 @@ CREATE TABLE total
     title VARCHAR2(10),
     location VARCHAR2(30),
     memo VARCHAR2(500),
-    tag VARCHAR2(100),
+    tag_list VARCHAR2(100),
     filename VARCHAR2(250),
     score VARCHAR2(10),
     date VARCHAR2(30),
@@ -111,10 +112,12 @@ CREATE TABLE total
     createdate DATE,
     username VARCHAR2(100),
     useremail VARCHAR2(100),
-    profilelmage VARCHAR2(100),
+    img_url  VARCHAR2(200),
+    profileimage VARCHAR2(100),
     category VARCHAR2(30),
     weather VARCHAR2(30),
     menu VARCHAR2(30),
+    viewcount int,
     price int,
     PRIMARY KEY (idx)
 );

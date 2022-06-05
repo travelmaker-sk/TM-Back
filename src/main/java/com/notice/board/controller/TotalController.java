@@ -60,7 +60,7 @@ public class TotalController {
     public String findAll(@RequestParam(value = "where", required = false)@Nullable String searchlocation, @RequestParam(value = "what",required = false)@Nullable String searchtag,
                           Model model, @PageableDefault(page = 0, size = 3, sort = "idx", direction = Sort.Direction.DESC) Pageable pageable, Total total) {
 
-        if(searchtag == null && searchlocation == null) {
+        if(searchtag == null && searchlocation == null) {           //  맨 처음 화면(검색하기 전)
             Page<Total> list = service.totallist(pageable);
 
             int nowpage = list.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
@@ -75,7 +75,7 @@ public class TotalController {
         }
 
 
-        if(searchtag == "" && searchlocation == "") {
+        if(searchtag == "" && searchlocation == "") {           //  아무것도 검색하지 않았을때
         Page<Total> list = service.totallist(pageable);
 
         int nowpage = list.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
@@ -88,7 +88,7 @@ public class TotalController {
         model.addAttribute("startpage", startpage);
         model.addAttribute("endpage", endpage);
         }
-        else if(searchtag != null && searchlocation == "" ){
+        else if(searchtag != null && searchlocation == "" ){            // 태그만 검색했을때
             Page<Total> searchtagList = service.tagsearch(searchtag,pageable);
 
             int nowpage = searchtagList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
@@ -99,9 +99,9 @@ public class TotalController {
             model.addAttribute("list", searchtagList);
             model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
             model.addAttribute("startpage", startpage);
-            model.addAttribute("endpage", endpage);
+            model.addAttribute("endpage", endpage); 
         }
-        else if(searchlocation != null && searchtag == ""){
+        else if(searchlocation != null && searchtag == ""){             // 위치만 검색했을때
             Page<Total> searchlocationList = service.locationsearch(searchlocation,pageable);
 
             int nowpage = searchlocationList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
@@ -114,7 +114,7 @@ public class TotalController {
             model.addAttribute("startpage", startpage);
             model.addAttribute("endpage", endpage);
         }
-        else if(searchlocation != null && searchtag != null){
+        else if(searchlocation != null && searchtag != null){               // 위치, 태그 검색했을때
             Page<Total> searchtotalList = service.totalsearch(searchlocation,searchtag,pageable);
 
             int nowpage = searchtotalList.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
@@ -346,8 +346,7 @@ public class TotalController {
     public String Totalupdate(@PathVariable("id") int id, Total total, MultipartFile file) throws IOException {
         Total temp = service.totaleditdetail(id);
 
-        System.out.println(temp.getImageUrl());
-        System.out.println(file);
+System.out.println(temp);
         temp.setTitle(total.getTitle());       // 기존의 내용중 이름을 새로운 값으로 덮어씌움
         temp.setLocation(total.getLocation());
         temp.setMemo(total.getMemo());
