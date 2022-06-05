@@ -23,4 +23,6 @@ public class SpringConfig implements WebMvcConfigurer {
                 .addResourceLocations(resourcePath);        // 외부 파일 저장 경로
     }
 
+
+
 }
