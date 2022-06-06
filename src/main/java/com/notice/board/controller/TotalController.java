@@ -193,6 +193,271 @@ public class TotalController {
         return "total/Totalfindall";
     }
 
+
+    // 게시글 더보기 전체 출력
+    @GetMapping("/findall/more")
+    public String findMoreAll(@RequestParam(value = "where", required = false)@Nullable String searchlocation,
+                              @RequestParam(value = "what",required = false)@Nullable String searchtag,
+                              @RequestParam(value = "category",required = false)@Nullable String searchcategory,
+                          Model model, Pageable pageable, Total total) {
+
+        // -------------------------- 맛집 부분 -------------------------
+        if(searchtag == null && searchlocation == null && searchcategory.equals("맛집")) {           //  맨 처음 화면(검색하기 전)
+
+            // 맛집 출력
+            Page<Total> storelist = service.selectAllSQL("맛집",pageable);
+
+
+            int nowpage = storelist.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, storelist.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", storelist);
+
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+
+        if(searchtag == "" && searchlocation == "" && searchcategory.equals("맛집")) {           //  아무것도 검색하지 않고 맛집 더보기 눌렀을때
+
+            // 맛집 출력
+            Page<Total> storelist = service.selectAllSQL("맛집",pageable);
+
+            int nowpage = storelist.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, storelist.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", storelist);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+        else if(searchtag != null && searchlocation == "" && searchcategory.equals("맛집")){            // 태그만 검색하고 맛집 더보기 눌렀을때
+
+            Page<Total> searchstore = service.TagAndCategorySearch(searchtag,"맛집",pageable);
+
+            int nowpage = searchstore.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchstore.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchstore);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag == "" && searchcategory.equals("맛집")){             // 위치만 검색했을때
+
+            Page<Total> searchstore = service.LocationAndCategorySearch(searchlocation,"맛집",pageable);
+
+
+            int nowpage = searchstore.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchstore.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchstore);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag != null && searchcategory.equals("맛집")){               // 위치, 태그 검색했을때
+
+            Page<Total> searchstore = service.LocationAndTagAndCatgorySearch(searchlocation,searchtag,"맛집",pageable);
+
+
+            int nowpage = searchstore.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchstore.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchstore);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else{
+            System.out.println("fail");
+        }
+
+        // -------------------------- 숙소 부분 -------------------------
+        if(searchtag == null && searchlocation == null && searchcategory.equals("숙소")) {           //  맨 처음 화면(검색하기 전)
+
+            // 맛집 출력
+            Page<Total> lodginglist = service.selectAllSQL("숙소",pageable);
+
+
+            int nowpage = lodginglist.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, lodginglist.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", lodginglist);
+
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+
+        if(searchtag == "" && searchlocation == "" && searchcategory.equals("숙소")) {           //  아무것도 검색하지 않고 맛집 더보기 눌렀을때
+
+            // 맛집 출력
+            Page<Total> searchlodging = service.selectAllSQL("숙소",pageable);
+
+            int nowpage = searchlodging.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchlodging.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchlodging);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+        else if(searchtag != null && searchlocation == "" && searchcategory.equals("숙소")){            // 태그만 검색하고 맛집 더보기 눌렀을때
+
+            Page<Total> searchlodging = service.TagAndCategorySearch(searchtag,"숙소",pageable);
+
+            int nowpage = searchlodging.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchlodging.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchlodging);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag == "" && searchcategory.equals("숙소")){             // 위치만 검색했을때
+
+            Page<Total> searchlodging = service.LocationAndCategorySearch(searchlocation,"숙소",pageable);
+
+
+            int nowpage = searchlodging.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchlodging.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchlodging);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag != null && searchcategory.equals("숙소")){               // 위치, 태그 검색했을때
+
+            Page<Total> searchlodging = service.LocationAndTagAndCatgorySearch(searchlocation,searchtag,"숙소",pageable);
+
+
+            int nowpage = searchlodging.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchlodging.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchlodging);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else{
+            System.out.println("fail");
+        }
+
+
+        // -------------------------- 명소 부분 -------------------------
+        if(searchtag == null && searchlocation == null && searchcategory.equals("명소")) {           //  맨 처음 화면(검색하기 전)
+
+            // 맛집 출력
+            Page<Total> placelist = service.selectAllSQL("명소",pageable);
+
+
+            int nowpage = placelist.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, placelist.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", placelist);
+
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+
+        if(searchtag == "" && searchlocation == "" && searchcategory.equals("명소")) {           //  아무것도 검색하지 않고 맛집 더보기 눌렀을때
+
+            // 맛집 출력
+            Page<Total> searchplace = service.selectAllSQL("명소",pageable);
+
+            int nowpage = searchplace.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchplace.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchplace);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+
+        else if(searchtag != null && searchlocation == "" && searchcategory.equals("명소")){            // 태그만 검색하고 맛집 더보기 눌렀을때
+
+            Page<Total> searchplace = service.TagAndCategorySearch(searchtag,"명소",pageable);
+
+            int nowpage = searchplace.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchplace.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchplace);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag == "" && searchcategory.equals("명소")){             // 위치만 검색했을때
+
+            Page<Total> searchplace = service.LocationAndCategorySearch(searchlocation,"명소",pageable);
+
+
+            int nowpage = searchplace.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchplace.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchplace);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else if(searchlocation != null && searchtag != null && searchcategory.equals("명소")){               // 위치, 태그 검색했을때
+
+            Page<Total> searchplace = service.LocationAndTagAndCatgorySearch(searchlocation,searchtag,"명소",pageable);
+
+
+            int nowpage = searchplace.getPageable().getPageNumber() + 1;    // 게시물 아래의 페이지 번호 구현을 위한 설정 - 현재 페이지
+            int startpage = Math.max(nowpage - 4, 1);                 // 현재 페이지 기준으로 앞쪽으로 4개의 페이지 출력
+            // 만약 현재 페이지가 1이면 -3이 출력되므로 최소 1로 설정
+            int endpage = Math.min(nowpage + 5, searchplace.getTotalPages()); // 마지막 페이지까지 출력
+
+            model.addAttribute("list", searchplace);
+            model.addAttribute("nowpage", nowpage);      // html에서 출력시키기 위해 model을 사용하여  값 전송
+            model.addAttribute("startpage", startpage);
+            model.addAttribute("endpage", endpage);
+        }
+        else{
+            System.out.println("fail");
+        }
+
+
+        return "total/Totalstorefindall";
+    }
+
 //    @GetMapping("/findall/lodging")                // 게시글 숙소 전체 출력
 //    public String findLogingAll(Model model, @PageableDefault(page = 0, size = 3, sort = "totalid", direction = Sort.Direction.DESC)
 //            Pageable pageable, Total total) {
