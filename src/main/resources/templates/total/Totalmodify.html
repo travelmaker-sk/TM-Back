@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>맛집 글 수정하기</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<form th:action="@{/total/update/{id}(id=${data.idx})}" method="post">
+<!--    <input type="file" name="file" th:value="@{${data.imageUrl}}"><br>-->
+    <input type="file" name="file" id="imageUrl" class = "form-control" multiple="multiple"><br>
+    타이틀 : <input type="text" name="title" th:value="${data.title}">  <br>
+    위치 : <input type="text" name="location" th:value="${data.location}">                              <!--<input type="text" name="communitykind">  <br>-->
+    <br>
+    메모 : <textarea id="memo" name="memo" rows="10" th:text="${data.memo}" th:value="${data.memo}"></textarea>
+    목적 : <select name ="category" th:value="${data.category}">
+    <option value="숙소">숙소</option>
+    <option value="맛집">맛집</option>
+    <option value="명소">명소</option>
+</select><br>
+    태그 : <input type="text" name="tagList" th:value="${data.tagList}" >  <br>
+    평점 : <input trpe="text" name="score" th:value="${data.score}">  <br>
+    날짜 : <input trpe="text" name="date" th:value="${data.date}">  <br>
+    좋아요 : <input trpe="text" name="liked" th:value="${data.liked}">  <br>
+    날씨 : <input type="text" name="weather" th:value="${data.weather}">  <br>
+    메뉴 : <input type="text" name="menu" th:value="${data.menu}">  <br>
+    가격 : <input type="text" name="price" th:value="${data.price}">  <br>
+    <input type="submit" value="수정">
+</form>
+</body>
+</html>

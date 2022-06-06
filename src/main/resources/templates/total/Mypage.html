@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>맛집 전체 출력</title>
+</head>
+<body>
+<form action="/total/findall">
+    <input type="text" name="where" placeholder="위치 검색">
+    <input type="text" name="what" placeholder="태그 검색">
+    <button>검색하기</button>
+</form><hr>
+<table>
+    <thead>
+    <p th:each="imformation:${list}">
+        <tr>
+            <th><a th:href="@{/total/finddetail/{id}(id=${imformation.idx})}"><img th:src="|/upload/${imformation.imageUrl}|" height="150" width="180"/></a></th>
+        </tr>
+        <tr>
+            <th><a th:text="${imformation.tagList}" th:href="@{/total/finddetail(id=${imformation.idx})}"></a></th>
+        </tr>
+    </p>
+    <hr>
+    </thead>
+</table>
+
+
+</body>
+</html>
