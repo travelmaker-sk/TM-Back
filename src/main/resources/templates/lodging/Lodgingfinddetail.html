@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>숙소 상세 페이지</title>
+</head>
+<body>
+<img th:src="@{${data.lodgingfilepath}}"/>
+<!-- <a th:href="@{${data.storefilepath}}">다운받기</a>     변수는 ${변수}로 감싸줘야 한다.  -->
+<p th:text="'ID : '+${data.lodgingid}"></p>   <!-- ""안에 ''사용하여 메세지 출력과 thymeleaf사용하여 값 출력 , member는 controller에서 설정한 객체 이름 -->
+<p th:text="'숙소이름 : '+${data.lodgingname}"></p>
+<p th:text="'숙소위치 : '+${data.lodginglocation}"></p>
+<p th:text="'가격 : '+${data.lodgingprice}"></p>
+<p th:text="'평점 : '+${data.lodgingscore}"></p>
+<p th:text="'메모 : '+${data.lodgingmemo}"></p>
+<p th:text="'태그 : '+${data.lodgingtag}"></p><hr>
+<button><a th:href="@{/lodging/modify/{id}(id=${data.lodgingid})}">수정</a></button>
+<button><a th:href="@{/lodging/delete(id=${data.lodgingid})}">삭제</a></button>
+
+</body>
+</html>

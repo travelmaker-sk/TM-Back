@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fetch</title>
+</head>
+<body>
+<table>
+    <thead>
+    <p th:each="information:${list}">
+        <tr>
+            <th><a th:href="@{/store/finddetail(id=${information.storeid})}"><img th:src="@{${information.storefilepath}}" /></a></th>
+        </tr>
+        <tr>
+            <th><a th:text="${information.storetag}" th:href="@{/store/finddetail(id=${information.storeid})}"></a></th>
+        </tr>
+    </p>
+    </thead>
+</table>
+</body>
+</html>
