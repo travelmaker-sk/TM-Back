@@ -62,3 +62,9 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 </div>
 
 <br />  
+
+<hr/>
+
+## 프로젝트 주요 기능 
+
+
