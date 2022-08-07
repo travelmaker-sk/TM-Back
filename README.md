@@ -161,18 +161,20 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 
 ## 포토카드 게시물 검색 기능
 <img src="https://user-images.githubusercontent.com/50544205/183281906-82cc1306-b42e-4cfd-996b-8d3fd49a0756.png"/>
+
 #### - 1. 인기 여행지 목록 제공
 
 <br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183281924-e1fb0178-7ee2-464a-b41b-d7d0a197c29b.png"/>
+
 #### - 2. 글자에 관련된 장소 목록 제공
 
 <br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183281927-60f240a7-5b3f-43d4-8d65-359118aeca33.png"/>
-#### - 3. 키워드 제외 장소만 검색 했을 때 
 
+#### - 3. 키워드 제외 장소만 검색 했을 때 
 <br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183281989-829ebb82-f4fd-47d7-8689-e5cf01e841ab.png"/>
