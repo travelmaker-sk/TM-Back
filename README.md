@@ -61,9 +61,7 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
   <img alt="Amazon EC2" src="https://img.shields.io/badge/Amazon EC2-FF4F8B?style=for-the-badge&logo=Amazon EC2&logoColor=white"/>
 </div>
 
-<br />  
-
-<hr/>
+<br />
 <br />  
 
 ## 프로젝트 주요 기능 
