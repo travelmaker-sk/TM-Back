@@ -162,9 +162,9 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 ## 포토카드 만들기
 <img src="https://user-images.githubusercontent.com/50544205/183281809-a308a280-991d-47e5-9c5f-93d8faacfe47.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281810-ff29825b-30fb-4b92-a12a-a2081cc21a0c.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281847-985e78c9-a107-4c75-a3e3-83dd5f9e48ec.png"/>
 
+#### - 포토카드 프린트 기기로 포토카드 인쇄!
 
 <br />
-
-
 
