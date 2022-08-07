@@ -64,7 +64,7 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 <br />
 <br />  
 
-## 프로젝트 주요 기능 
+## ☁️ 프로젝트 주요 기능 
 
 ### ➀ 로그인
 #### &nbsp;&nbsp; 1. 웹 자체의 기본 로그인 기능과 그 정보가 저장되는 DB관리  
