@@ -16,7 +16,7 @@
 - 2022년 3월 02일 ~ 2022년 6월 18일
 
 <br><br>
-# 🎞 프로젝트 시연영상 🎞
+# 🎞 프로젝트 발표영상 🎞
 https://www.youtube.com/watch?v=9MgqoV3XX6w
   
 # ⚙️ 기술 스택
