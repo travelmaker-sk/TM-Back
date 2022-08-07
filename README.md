@@ -133,7 +133,38 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 <img src="https://user-images.githubusercontent.com/50544205/183281620-2ca73038-cdea-4eda-98c9-fcac76993f1d.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281626-d6f28696-850e-43be-ac9d-4404b7bd1e1d.png"/>
 
+#### - 가볼만 한곳 , 숙소 , 맛집 선택 가능
+#### - 카테고리 별 포토카드 형식 변화
+#### - 포토카드 데이터 입력 후 업로드 버튼 클릭
+#### - 위에서 만든 포토카드 목록 출력 확인
 
+<br />
+
+## 북마크 기능
+<img src="https://user-images.githubusercontent.com/50544205/183281747-5b9a4ac0-a00e-4fdc-a66d-b604bf23232a.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281760-5013b242-5d2f-495f-8002-1fa5b4f08712.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281762-a33b4903-133f-4d2f-bf9c-fe20ead0780b.png"/>
+
+
+#### - 북마크 추가 후 북마크 페이지 이동
+#### - 북마크 한 포토카드 출력 확인
+
+
+<br />
+
+## 좋아요 기능
+<img src="https://user-images.githubusercontent.com/50544205/183281797-14a056b2-25f9-448e-9a21-5a7670dd7f24.png"/>
+
+#### - 좋아요 하트를 클릭하면 숫자 카운팅
+
+<br />
+
+## 포토카드 만들기
+<img src="https://user-images.githubusercontent.com/50544205/183281809-a308a280-991d-47e5-9c5f-93d8faacfe47.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281810-ff29825b-30fb-4b92-a12a-a2081cc21a0c.png"/>
+
+
+<br />
 
 
 
