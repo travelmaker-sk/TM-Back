@@ -159,6 +159,41 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 
 <br />
 
+## 포토카드 게시물 검색 기능
+<img src="https://user-images.githubusercontent.com/50544205/183281906-82cc1306-b42e-4cfd-996b-8d3fd49a0756.png"/>
+#### - 1. 인기 여행지 목록 제공
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/50544205/183281924-e1fb0178-7ee2-464a-b41b-d7d0a197c29b.png"/>
+#### - 2. 글자에 관련된 장소 목록 제공
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/50544205/183281927-60f240a7-5b3f-43d4-8d65-359118aeca33.png"/>
+#### - 3. 키워드 제외 장소만 검색 했을 때 
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/50544205/183281989-829ebb82-f4fd-47d7-8689-e5cf01e841ab.png"/>
+#### - 4. 장소 검색 페이지
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/50544205/183282018-0523be8a-51c0-4b1e-bcc2-5528772e876f.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183282020-e4381adf-0702-45e9-a167-fce57f1730ad.png"/>
+#### - 5. 해수욕장 키워드 검색
+#### - 6. 해수욕장 태그가 붙어 있는 게시물 출력 확인
+
+<br />
+
+<img src="https://user-images.githubusercontent.com/50544205/183282091-48134345-cd25-4e89-b14a-a74a69f139c8.png"/>
+#### - 5. 해수욕장 키워드 검색
+#### - 6. 해수욕장 태그가 붙어 있는 게시물 출력 확인
+
+<br />
+
+
 ## 포토카드 만들기
 <img src="https://user-images.githubusercontent.com/50544205/183281809-a308a280-991d-47e5-9c5f-93d8faacfe47.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281810-ff29825b-30fb-4b92-a12a-a2081cc21a0c.png"/>
@@ -167,4 +202,5 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 #### - 포토카드 프린트 기기로 포토카드 인쇄!
 
 <br />
+
 
