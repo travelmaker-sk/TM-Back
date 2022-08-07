@@ -16,7 +16,7 @@
 
 <br><br>
 # 🎞 프로젝트 시연영상 🎞
-https://www.youtube.com/watch?v=GsA8UhmQMKo&t=1s
+
   
 # ⚙️ 기술 스택
   
