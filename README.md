@@ -102,13 +102,14 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 
 ## 메인페이지
 <img src="https://user-images.githubusercontent.com/50544205/183281240-af1dc310-9233-4683-9571-5caa2a000eaf.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281261-ff1355cc-6fa1-44d9-a7c5-1a3c5fe6d99e.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281281-15032017-05db-4b87-88f6-bce2047bcdfc.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281290-0788f514-c1de-4431-916c-5d8db8d607a2.png"/>
+
 
 
 
 ![image]()
-
-
-
 
 
 
