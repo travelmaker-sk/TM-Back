@@ -1,6 +1,7 @@
 # TravelMaker
 
-### 여행에서의 추억들을 공유해보세요! + 포토카드까지!!!
+### <img src="https://user-images.githubusercontent.com/50544205/183280189-094ce587-698a-4187-8cc6-1e103e13e744.png"/>여행에서의 추억들을 공유해보세요! + 포토카드까지!!!
+
 <center><img src="https://user-images.githubusercontent.com/50544205/183279893-3d11481d-5ac7-4b20-8c9d-e7771aabac2b.png" width:"1200" height:"1000"/></center>
 
 # 👥 멤버
