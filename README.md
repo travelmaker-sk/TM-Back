@@ -101,10 +101,11 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 # 🗓 프로젝트 소개 (서버가 없으므로... 사진으로 대체합니다!)
 
 ## 메인페이지
-<img src="https://user-images.githubusercontent.com/50544205/183281201-a0c5f74f-0a21-4bde-9674-149b41460532.png" width:"1200" height:"1000"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281240-af1dc310-9233-4683-9571-5caa2a000eaf.png"/>
 
 
 
+![image]()
 
 
 
