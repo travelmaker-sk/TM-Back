@@ -109,6 +109,8 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 #### - 인기, 최신, 맛집, 가볼만한 곳, 숙소로 분할
 #### - 총 5개의 포토카드 리스트
 
+<br />
+
 
 ## 로그인
 <img src=""/>
