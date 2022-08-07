@@ -163,36 +163,34 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 <img src="https://user-images.githubusercontent.com/50544205/183281906-82cc1306-b42e-4cfd-996b-8d3fd49a0756.png"/>
 
 #### - 인기 여행지 목록 제공
-
-<br />
+<br /><br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183281924-e1fb0178-7ee2-464a-b41b-d7d0a197c29b.png"/>
 
 #### - 글자에 관련된 장소 목록 제공
-
-<br />
+<br /><br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183281927-60f240a7-5b3f-43d4-8d65-359118aeca33.png"/>
 
 #### - 키워드 제외 장소만 검색 했을 때 
-<br />
+<br /><br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183281989-829ebb82-f4fd-47d7-8689-e5cf01e841ab.png"/>
 
 #### - 장소 검색 페이지
-<br />
+<br /><br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183282018-0523be8a-51c0-4b1e-bcc2-5528772e876f.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183282020-e4381adf-0702-45e9-a167-fce57f1730ad.png"/>
 
 #### - 해수욕장 키워드 검색
 #### - 해수욕장 태그가 붙어 있는 게시물 출력 확인
-<br />
+<br /><br />
 
 <img src="https://user-images.githubusercontent.com/50544205/183282091-48134345-cd25-4e89-b14a-a74a69f139c8.png"/>
 
 #### - 장소가 부산으로 설정되어 있고 태그에 해수욕장이 붙어 있는 게시물 출력 확인
-<br />
+<br /><br />
 
 
 ## 포토카드 만들기
