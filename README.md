@@ -106,8 +106,8 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 <img src="https://user-images.githubusercontent.com/50544205/183281281-15032017-05db-4b87-88f6-bce2047bcdfc.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281290-0788f514-c1de-4431-916c-5d8db8d607a2.png"/>
 
-### - 인기, 최신, 맛집, 가볼만한 곳, 숙소로 분할
-### - 총 5개의 포토카드 리스트
+#### - 인기, 최신, 맛집, 가볼만한 곳, 숙소로 분할
+#### - 총 5개의 포토카드 리스트
 
 
 
