@@ -115,7 +115,7 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 ## 로그인
 <img src=""/>
 <img src="https://user-images.githubusercontent.com/50544205/183281420-22d95b01-e009-4ae1-88e2-47b8aa187594.png"/>
-<img src="https://user-images.githubusercontent.com/50544205/183281484-e26d7633-5d19-41e2-a379-6f09d3d1f39f.png"/>
+<img src="https://user-images.githubusercontent.com/50544205/183281657-41c41d47-f926-4eb5-9906-d8e6d4e7129a.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281439-ec2b7f87-0367-4b68-b8e4-60164417b408.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281449-c6bcc35c-5f40-4a33-b248-dc7d0a60e0b9.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281456-fdf58237-161b-431d-9d86-69cf3af7c179.png"/>
@@ -126,12 +126,14 @@ https://www.youtube.com/watch?v=9MgqoV3XX6w
 
 <br />
 
-## 게시물
+## 포토카드 만들기
 <img src="https://user-images.githubusercontent.com/50544205/183281605-5d81c56b-6adb-403f-8d07-49393d904e0c.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281607-561a9c30-fd2c-4a2f-a11b-3a875fecb571.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281610-82660765-7435-437c-97bc-fdaa39e21915.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281620-2ca73038-cdea-4eda-98c9-fcac76993f1d.png"/>
 <img src="https://user-images.githubusercontent.com/50544205/183281626-d6f28696-850e-43be-ac9d-4404b7bd1e1d.png"/>
+
+
 
 
 
