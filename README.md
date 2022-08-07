@@ -1,8 +1,8 @@
 # TravelMaker
 
 ### 여행에서의 추억들을 공유해보세요! + 포토카드까지!!!
-<p align="center"><img src="" />
-  
+<p align="center"><img src="https://user-images.githubusercontent.com/50544205/183279893-3d11481d-5ac7-4b20-8c9d-e7771aabac2b.png" />
+
 # 👥 멤버
 - Front-end: [홍유진](https://github.com/yujinyny)
 - Back-end: [남신욱](https://github.com/tlsdnr1135), [박지완](https://github.com/Parkjiwan2), [배지원](https://github.com/Bae-Ji-Won)
@@ -36,6 +36,8 @@
 <img src="http://img.shields.io/badge/-Amazon AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white" />
 <img src="http://img.shields.io/badge/-Amazon EC2-FF4F8B?style=for-the-badge&logo=Amazon EC2&logoColor=white" />
 </div>  
+
+
 
 ### Back-End
 
